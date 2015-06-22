@@ -1,0 +1,99 @@
+
+
+<html>
+<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+        <div data-role="page" data-theme="a">
+                <div data-role="header" style="background-color:#004387; color:#FFFFFF; text-shadow: 1px 1px 1px #004387;">
+                        <h1>Row Time</h1>
+                </div>
+                <div data-role="main" class="ui-content">
+    
+    
+<form>
+    
+<fieldset data-role="controlgroup" data-type="vertical">
+  <legend>Color mode</legend>
+  <select id="key1" name="key1">
+      <option value="0" >Changing every 5 min</option>
+      <option value="1" >Blue</option>
+      <option value="2" >Red</option>
+      <option value="3" >Green</option>
+      <option value="4" >Orange</option>
+      <option value="5" >Purple</option>
+      <option value="6" >Yellow</option>
+</select>
+</fieldset>
+
+    
+<fieldset data-role="controlgroup" data-type="vertical">
+  <legend>First line info</legend>
+  <select id="key2" name="key2">
+      <option value="0" >Bluetooth status + battery level</option>
+      <option value="1" >Day of the week + day of the year</option>
+</select>
+</fieldset>
+    
+    
+    
+<fieldset data-role="controlgroup" data-type="vertical">
+  <legend>Animation</legend>
+  <select id="key3" name="key3">
+      <option value="0" >Expand</option>
+      <option value="1" >Side</option>
+      <option value="2" >Side repeat</option>
+      <option value="3" >Off</option>
+</select>
+</fieldset>
+
+
+
+<div style="display:none"><input type="checkbox" name="validated" id="validated" value="1" checked="checked" style="display:none"></div>
+
+                        
+                        <div data-corners="true" data-shadow="true" data-iconshadow="true">
+                                <button style="width:100%; margin-left:auto; margin-right:auto; background-color:#004387; color:#FFFFFF; text-shadow: 1px 1px 1px #004387;" type="submit" id="submit"><img src="Button250.png" alt="" style="width:117px;height:40px;"></button>
+                        </div>
+                        </form>
+                </div>
+        </div>
+        
+        <script>
+                function saveOptions() {
+                        var options = {
+                                'validate': '1',
+                                'color': $("#key1").val(),
+				                'firstline': $("#key2").val(),
+				                'animation': $("#key3").val()
+                        };
+                        return options;
+                }
+
+function getQueryParam(variable, default_) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (pair[0] == variable)
+            return decodeURIComponent(pair[1]);
+    }
+    return default_ || false;
+}
+                
+                $().ready(function() {
+                        $("#submit").click(function() {
+                                console.log(saveOptions());
+var return_to = getQueryParam('return_to', 'pebblejs://close#');
+                                var location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
+                                document.location = location;
+                        });
+                });
+        </script>
+</body>
+</html>
